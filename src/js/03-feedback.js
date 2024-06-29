@@ -22,7 +22,7 @@ function handlerFormSubmit(e) {
   console.log(dataForm.message);
 }
 
-updateLocalStorage = throttle(() => {
+const updateLocalStorage = throttle(() => {
   localStorage.setItem(elements.LOCAL_STORAGE_KEY, JSON.stringify(dataForm));
 }, 500);
 
