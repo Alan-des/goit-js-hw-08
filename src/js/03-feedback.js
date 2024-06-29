@@ -6,7 +6,8 @@ const elements = {
   messageForm: document.querySelector('textarea[name="message"]'),
   LOCAL_STORAGE_KEY: 'feedback-form-state',
 };
-const dataForm = {};
+
+let dataForm = {};
 
 elements.form.addEventListener('input', handlerForm);
 
@@ -31,15 +32,21 @@ function handlerForm(e) {
   updateLocalStorage();
 }
 
-if (localStorage.getItem(elements.LOCAL_STORAGE_KEY)) {
-  const dataForm = JSON.parse(localStorage.getItem(elements.LOCAL_STORAGE_KEY));
-  if (dataForm.email) {
-    elements.emailForm.value = dataForm.email;
+
+  const savedData = localStorage.getItem(elements.LOCAL_STORAGE_KEY);
+  if (savedData) {
+    dataForm = JSON.parse(savedData)
+
+    if (dataForm.email) {
+      elements.emailForm.value = dataForm.email;
+    }
+    if (dataForm.message) {
+      elements.messageForm.value = dataForm.message;
+    }
   }
-  if (dataForm.message) {
-    elements.messageForm.value = dataForm.message;
+   else {
+    elements.emailForm.value = '';
+    elements.messageForm.value = '';
   }
-} else {
-  elements.emailForm.value = '';
-  elements.messageForm.value = '';
-}
+  
+
